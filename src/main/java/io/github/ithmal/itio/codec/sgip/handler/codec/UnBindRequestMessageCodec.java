@@ -1,14 +1,9 @@
 package io.github.ithmal.itio.codec.sgip.handler.codec;
 
-import io.github.ithmal.itio.codec.sgip.base.SgipMessage;
 import io.github.ithmal.itio.codec.sgip.handler.IMessageCodec;
-import io.github.ithmal.itio.codec.sgip.message.BindRequest;
 import io.github.ithmal.itio.codec.sgip.message.UnBindRequest;
-import io.github.ithmal.itio.codec.sgip.util.StringUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.lang.reflect.Constructor;
 
 /**
  * @author: ken.lin
@@ -25,5 +20,10 @@ public class UnBindRequestMessageCodec implements IMessageCodec<UnBindRequest> {
     @Override
     public void encode(ChannelHandlerContext ctx, UnBindRequest msg, ByteBuf byteBuf) throws Exception {
 
+    }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, UnBindRequest msg) {
+        return 0;
     }
 }

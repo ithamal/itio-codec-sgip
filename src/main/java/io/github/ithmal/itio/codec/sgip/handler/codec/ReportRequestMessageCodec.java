@@ -35,4 +35,9 @@ public class ReportRequestMessageCodec implements IMessageCodec<ReportRequest> {
         byteBuf.writeByte(msg.getErrorCode());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, ReportRequest msg) {
+        return 44;
+    }
 }

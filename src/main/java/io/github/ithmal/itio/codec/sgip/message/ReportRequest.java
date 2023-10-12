@@ -2,7 +2,6 @@ package io.github.ithmal.itio.codec.sgip.message;
 
 
 import io.github.ithmal.itio.codec.sgip.base.Command;
-import io.github.ithmal.itio.codec.sgip.base.MsgContent;
 import io.github.ithmal.itio.codec.sgip.base.SgipMessage;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,11 +51,6 @@ public class ReportRequest extends SgipMessage {
 
     public ReportRequest(long sequenceId) {
         super(Command.REPORT_REQUEST, sequenceId);
-    }
-
-    @Override
-    public int getLength() {
-        return 44;
     }
 
     @Override

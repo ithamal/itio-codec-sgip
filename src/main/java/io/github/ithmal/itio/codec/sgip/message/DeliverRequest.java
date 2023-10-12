@@ -49,11 +49,6 @@ public class DeliverRequest extends SgipMessage {
         super(Command.DELIVER_REQUEST, sequenceId);
     }
 
-    @Override
-    public int getLength() {
-        return 57 + msgContent.getMsgLength();
-    }
-
     public DeliverRequest copy(){
         DeliverRequest newObj = new DeliverRequest(getSequenceId());
         newObj.userNumber = userNumber;

@@ -37,4 +37,9 @@ public class DeliverRequestMessageCodec implements IMessageCodec<DeliverRequest>
         msg.getMsgContent().write(byteBuf);
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, DeliverRequest msg) {
+        return 57 + msg.getMsgContent().getMsgLength();
+    }
 }

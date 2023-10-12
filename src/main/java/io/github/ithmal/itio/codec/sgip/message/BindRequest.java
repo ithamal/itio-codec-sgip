@@ -47,11 +47,6 @@ public class BindRequest extends SgipMessage {
     }
 
     @Override
-    public int getLength() {
-        return 41;
-    }
-
-    @Override
     public String toString() {
         return "BindRequest{" +
                 "loginType=" + loginType +

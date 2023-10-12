@@ -31,11 +31,6 @@ public class SubmitResponse extends SgipMessage {
     }
 
     @Override
-    public int getLength() {
-        return 9;
-    }
-
-    @Override
     public String toString() {
         return "SubmitResponse{" +
                 "result=" + result +

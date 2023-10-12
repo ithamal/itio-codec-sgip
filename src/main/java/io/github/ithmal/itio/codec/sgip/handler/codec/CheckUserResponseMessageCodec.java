@@ -1,13 +1,10 @@
 package io.github.ithmal.itio.codec.sgip.handler.codec;
 
 import io.github.ithmal.itio.codec.sgip.handler.IMessageCodec;
-import io.github.ithmal.itio.codec.sgip.message.CheckUserRequest;
 import io.github.ithmal.itio.codec.sgip.message.CheckUserResponse;
 import io.github.ithmal.itio.codec.sgip.util.StringUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author: ken.lin
@@ -29,5 +26,10 @@ public class CheckUserResponseMessageCodec implements IMessageCodec<CheckUserRes
         byteBuf.writeByte(msg.getResult());
         byteBuf.writeByte(msg.getStatus());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
+    }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, CheckUserResponse msg) {
+        return 10;
     }
 }

@@ -25,4 +25,9 @@ public class ReportResponseMessageCodec implements IMessageCodec<ReportResponse>
         byteBuf.writeByte(msg.getResult());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, ReportResponse msg) {
+        return 9;
+    }
 }

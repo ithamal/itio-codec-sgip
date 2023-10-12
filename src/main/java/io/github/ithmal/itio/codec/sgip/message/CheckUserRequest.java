@@ -40,11 +40,6 @@ public class CheckUserRequest extends SgipMessage {
     }
 
     @Override
-    public int getLength() {
-        return 61;
-    }
-
-    @Override
     public String toString() {
         return "CheckUserRequest{" +
                 "userName='" + userName + '\'' +

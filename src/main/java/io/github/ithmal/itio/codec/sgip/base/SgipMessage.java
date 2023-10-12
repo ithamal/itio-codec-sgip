@@ -23,6 +23,4 @@ public abstract class SgipMessage {
         this.command = command;
         this.sequenceId = sequenceId;
     }
-
-    public abstract int getLength();
 }

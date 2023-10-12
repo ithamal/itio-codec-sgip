@@ -6,8 +6,6 @@ import io.github.ithmal.itio.codec.sgip.util.StringUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.nio.charset.StandardCharsets;
-
 /**
  * @author: ken.lin
  * @since: 2023-10-06 16:39
@@ -26,5 +24,10 @@ public class BindResponseMessageCodec implements IMessageCodec<BindResponse> {
     public void encode(ChannelHandlerContext ctx, BindResponse msg, ByteBuf byteBuf) throws Exception {
         byteBuf.writeByte(msg.getResult());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
+    }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, BindResponse msg) {
+        return 9;
     }
 }

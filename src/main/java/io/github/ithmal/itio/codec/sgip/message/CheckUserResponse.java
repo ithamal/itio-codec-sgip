@@ -38,11 +38,6 @@ public class CheckUserResponse extends SgipMessage {
     }
 
     @Override
-    public int getLength() {
-        return 10;
-    }
-
-    @Override
     public String toString() {
         return "CheckUserResponse{" +
                 "result=" + result +

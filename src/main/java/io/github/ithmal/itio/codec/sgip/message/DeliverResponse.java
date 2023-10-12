@@ -29,10 +29,5 @@ public class DeliverResponse extends SgipMessage {
     public DeliverResponse(long sequenceId) {
         super(Command.DELIVER_RESPONSE, sequenceId);
     }
-
-    @Override
-    public int getLength() {
-        return 9;
-    }
 }
 

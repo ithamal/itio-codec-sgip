@@ -6,8 +6,6 @@ import io.github.ithmal.itio.codec.sgip.util.StringUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
-import java.nio.charset.StandardCharsets;
-
 /**
  * @author: ken.lin
  * @since: 2023-10-06 16:39
@@ -30,5 +28,10 @@ public class CheckUserRequestMessageCodec implements IMessageCodec<CheckUserRequ
         byteBuf.writeBytes(StringUtils.toBytes(msg.getPassword(), 16));
         byteBuf.writeBytes(StringUtils.toBytes(msg.getUserNumber(), 21));
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
+    }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, CheckUserRequest msg) {
+        return 61;
     }
 }

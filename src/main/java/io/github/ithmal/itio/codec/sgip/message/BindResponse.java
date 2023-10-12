@@ -30,11 +30,6 @@ public class BindResponse extends SgipMessage {
     }
 
     @Override
-    public int getLength() {
-        return 9;
-    }
-
-    @Override
     public String toString() {
         return "BindResponse{" +
                 "result=" + result +

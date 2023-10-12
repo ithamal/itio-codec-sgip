@@ -25,4 +25,9 @@ public class DeliverResponseMessageCodec implements IMessageCodec<DeliverRespons
         byteBuf.writeByte(msg.getResult());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, DeliverResponse msg) {
+        return 9;
+    }
 }

@@ -17,10 +17,5 @@ public class UnBindRequest extends SgipMessage {
     public UnBindRequest(long sequenceId) {
         super(Command.UNBIND_REQUEST, sequenceId);
     }
-
-    @Override
-    public int getLength() {
-        return 0;
-    }
 }
 

@@ -13,6 +13,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,6 +44,7 @@ public class SgipClientTests {
             @Override
             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
                 cause.printStackTrace();
+                ctx.close();
             }
         });
         client.connect(host, port);
@@ -51,9 +54,8 @@ public class SgipClientTests {
         bindRequest.setLoginType((short) 1);
         bindRequest.setUserName(userName);
         bindRequest.setPassword(password);
-        client.writeAndFlush(bindRequest);
         System.out.println("已请求");
-        BindResponse bindResponse = client.waitForResponse(BindResponse.class);
+        BindResponse bindResponse = client.writeWaitResponse(bindRequest, BindResponse.class);
         System.out.println("已响应");
         System.out.println(bindResponse);
         if (bindResponse.getResult() == 0) {
@@ -67,15 +69,17 @@ public class SgipClientTests {
         submitRequest.setCorpId(userName);
         submitRequest.setTpPid((short) 0);
         submitRequest.setTpUdhi((short) 0);
-        submitRequest.setMsgContent(MsgContent.fromText("【测试签名】测试信息", MsgFormat.UCS2));
-//        submitRequest.setContent(MsgContent.fromText("【测试签名】移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}", MsgFormat.UCS2));
+//        submitRequest.setMsgContent(MsgContent.fromText("【测试签名】测试信息", MsgFormat.UCS2));
+        submitRequest.setMsgContent(MsgContent.fromText("【测试签名】移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time" +
+                "}移动CMPP短信测试{time}移动CMPP短信测试{time}", MsgFormat.UCS2));
         // 长短信分割处理
-        for (SubmitRequest subSubmitRequest : LongSmsUtils.split(submitRequest)) {
-            client.writeAndFlush(subSubmitRequest);
-            System.out.println("提交请求");
-            SubmitResponse submitResponse = client.waitForResponse(SubmitResponse.class);
-            System.out.println("提交响应");
-            System.out.println(submitResponse);
+        List<SubmitRequest> submitRequests = new ArrayList<>(LongSmsUtils.split(submitRequest));
+        for (SubmitRequest subSubmitRequest : submitRequests) {
+            System.out.println("提交请求:" + subSubmitRequest);
+        }
+        List<SubmitResponse> submitResponses = client.writeWaitResponses(submitRequests, SubmitResponse.class);
+        for (SubmitResponse submitResponse : submitResponses) {
+            System.out.println("提交响应: " + submitResponse);
         }
         TimeUnit.SECONDS.sleep(30);
         client.disconnect();

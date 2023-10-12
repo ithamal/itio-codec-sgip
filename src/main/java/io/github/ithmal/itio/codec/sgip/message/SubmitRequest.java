@@ -130,11 +130,6 @@ public class SubmitRequest extends SgipMessage {
         super(Command.SUBMIT_REQUEST, sequenceId);
     }
 
-    @Override
-    public int getLength() {
-        return 144 + msgContent.getMsgLength();
-    }
-
     public SubmitRequest copy() {
         SubmitRequest newObj = new SubmitRequest(getSequenceId());
         newObj.spNumber = spNumber;

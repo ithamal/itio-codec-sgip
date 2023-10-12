@@ -19,4 +19,10 @@ public interface IMessageCodec<T extends SgipMessage> {
      * 编码
      */
     void encode(ChannelHandlerContext ctx, T msg, ByteBuf byteBuf) throws Exception;
+
+    /**
+     * 获取主体长度
+     * @return
+     */
+    int getBodyLength(ChannelHandlerContext ctx, T msg);
 }

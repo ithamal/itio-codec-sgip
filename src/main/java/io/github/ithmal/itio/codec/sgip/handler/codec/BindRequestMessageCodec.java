@@ -29,4 +29,9 @@ public class BindRequestMessageCodec implements IMessageCodec<BindRequest> {
         byteBuf.writeBytes(StringUtils.toBytes(msg.getPassword(), 16));
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, BindRequest msg) {
+        return 41;
+    }
 }

@@ -25,4 +25,9 @@ public class SubmitResponseMessageCodec implements IMessageCodec<SubmitResponse>
         byteBuf.writeByte(msg.getResult());
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, SubmitResponse msg) {
+        return 9;
+    }
 }

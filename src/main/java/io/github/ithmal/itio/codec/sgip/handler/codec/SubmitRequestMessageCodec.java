@@ -71,4 +71,9 @@ public class SubmitRequestMessageCodec implements IMessageCodec<SubmitRequest> {
         msg.getMsgContent().write(byteBuf);
         byteBuf.writeBytes(StringUtils.toBytes(msg.getReserve(), 8));
     }
+
+    @Override
+    public int getBodyLength(ChannelHandlerContext ctx, SubmitRequest msg) {
+        return 144 + msg.getMsgContent().getMsgLength();
+    }
 }
