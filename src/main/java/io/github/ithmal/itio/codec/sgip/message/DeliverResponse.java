@@ -29,5 +29,14 @@ public class DeliverResponse extends SgipMessage {
     public DeliverResponse(long sequenceId) {
         super(Command.DELIVER_RESPONSE, sequenceId);
     }
+
+    @Override
+    public String toString() {
+        return "DeliverResponse{" +
+                "result=" + result +
+                ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
+                '}';
+    }
 }
 

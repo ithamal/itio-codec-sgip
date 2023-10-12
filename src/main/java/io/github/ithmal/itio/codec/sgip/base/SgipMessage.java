@@ -11,7 +11,7 @@ import lombok.Setter;
 public abstract class SgipMessage {
 
     @Setter
-    private long sequenceId;
+    protected long sequenceId;
 
     private final Command command;
 

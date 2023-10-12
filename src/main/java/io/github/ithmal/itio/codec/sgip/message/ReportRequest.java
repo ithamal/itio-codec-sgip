@@ -62,6 +62,7 @@ public class ReportRequest extends SgipMessage {
                 ", state=" + state +
                 ", errorCode=" + errorCode +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

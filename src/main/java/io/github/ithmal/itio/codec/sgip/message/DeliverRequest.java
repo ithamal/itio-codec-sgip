@@ -69,6 +69,7 @@ public class DeliverRequest extends SgipMessage {
                 ", tpUdhi=" + tpUdhi +
                 ", msgContent=" + msgContent +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

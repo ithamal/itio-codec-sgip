@@ -46,6 +46,7 @@ public class CheckUserRequest extends SgipMessage {
                 ", password='" + password + '\'' +
                 ", userNumber='" + userNumber + '\'' +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

@@ -29,5 +29,14 @@ public class ReportResponse extends SgipMessage {
     public ReportResponse(long sequenceId) {
         super(Command.REPORT_RESPONSE, sequenceId);
     }
+
+    @Override
+    public String toString() {
+        return "ReportResponse{" +
+                "result=" + result +
+                ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
+                '}';
+    }
 }
 

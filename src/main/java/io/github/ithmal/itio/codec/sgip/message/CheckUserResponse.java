@@ -43,6 +43,7 @@ public class CheckUserResponse extends SgipMessage {
                 "result=" + result +
                 ", status=" + status +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

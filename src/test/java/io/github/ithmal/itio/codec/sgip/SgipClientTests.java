@@ -8,6 +8,7 @@ import io.github.ithmal.itio.codec.sgip.message.BindRequest;
 import io.github.ithmal.itio.codec.sgip.message.BindResponse;
 import io.github.ithmal.itio.codec.sgip.message.SubmitRequest;
 import io.github.ithmal.itio.codec.sgip.message.SubmitResponse;
+import io.github.ithmal.itio.codec.sgip.sequence.SequenceManager;
 import io.github.ithmal.itio.codec.sgip.util.LongSmsUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -33,6 +34,7 @@ public class SgipClientTests {
         String password = "2ymsc7";
         String sourceId = "106908887002";
         //
+        SequenceManager sequenceManager = new SequenceManager();
         ItioClient client = new ItioClient();
         client.registerCodecHandler(new SgipMessageCodec());
         client.registerBizHandler(new ChannelInboundHandlerAdapter() {
@@ -50,7 +52,7 @@ public class SgipClientTests {
         client.connect(host, port);
         System.out.println("已打开连接");
         // 请求
-        BindRequest bindRequest = new BindRequest(System.currentTimeMillis());
+        BindRequest bindRequest = new BindRequest(sequenceManager.nextValue());
         bindRequest.setLoginType((short) 1);
         bindRequest.setUserName(userName);
         bindRequest.setPassword(password);
@@ -73,9 +75,14 @@ public class SgipClientTests {
         submitRequest.setMsgContent(MsgContent.fromText("【测试签名】移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time}移动CMPP短信测试{time" +
                 "}移动CMPP短信测试{time}移动CMPP短信测试{time}", MsgFormat.UCS2));
         // 长短信分割处理
-        List<SubmitRequest> submitRequests = new ArrayList<>(LongSmsUtils.split(submitRequest));
-        for (SubmitRequest subSubmitRequest : submitRequests) {
-            System.out.println("提交请求:" + subSubmitRequest);
+        List<SubmitRequest> submitRequests = new ArrayList<>();
+        for (int i = 0; i < 1; i++) {
+            long sequenceId = sequenceManager.nextValue();
+            for (SubmitRequest request : LongSmsUtils.split(submitRequest)) {
+                request.setSequenceId(sequenceId);
+                submitRequests.add(request);
+                System.out.println("提交请求:" + request);
+            }
         }
         List<SubmitResponse> submitResponses = client.writeWaitResponses(submitRequests, SubmitResponse.class);
         for (SubmitResponse submitResponse : submitResponses) {

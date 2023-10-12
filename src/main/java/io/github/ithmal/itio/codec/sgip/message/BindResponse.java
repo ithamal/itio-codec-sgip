@@ -34,6 +34,7 @@ public class BindResponse extends SgipMessage {
         return "BindResponse{" +
                 "result=" + result +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

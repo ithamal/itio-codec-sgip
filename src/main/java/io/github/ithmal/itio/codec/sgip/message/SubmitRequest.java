@@ -159,7 +159,7 @@ public class SubmitRequest extends SgipMessage {
         return "SubmitRequest{" +
                 "spNumber='" + spNumber + '\'' +
                 ", chargeNumber='" + chargeNumber + '\'' +
-                ", userNumbers='" + Arrays.toString(userNumbers) + '\'' +
+                ", userNumbers=" + Arrays.toString(userNumbers) +
                 ", corpId='" + corpId + '\'' +
                 ", serviceType='" + serviceType + '\'' +
                 ", feeType=" + feeType +
@@ -173,9 +173,10 @@ public class SubmitRequest extends SgipMessage {
                 ", reportFlag=" + reportFlag +
                 ", tpPid=" + tpPid +
                 ", tpUdhi=" + tpUdhi +
-                ", messageType=" + msgType +
+                ", msgType=" + msgType +
                 ", msgContent=" + msgContent +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

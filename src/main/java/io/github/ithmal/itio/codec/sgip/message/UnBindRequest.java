@@ -17,5 +17,12 @@ public class UnBindRequest extends SgipMessage {
     public UnBindRequest(long sequenceId) {
         super(Command.UNBIND_REQUEST, sequenceId);
     }
+
+    @Override
+    public String toString() {
+        return "UnBindRequest{" +
+                "sequenceId=" + sequenceId +
+                '}';
+    }
 }
 

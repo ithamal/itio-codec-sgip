@@ -35,6 +35,7 @@ public class SubmitResponse extends SgipMessage {
         return "SubmitResponse{" +
                 "result=" + result +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }

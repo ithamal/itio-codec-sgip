@@ -5,6 +5,7 @@ import io.github.ithmal.itio.codec.sgip.base.MsgContent;
 import io.github.ithmal.itio.codec.sgip.base.MsgFormat;
 import io.github.ithmal.itio.codec.sgip.handler.SgipMessageCodec;
 import io.github.ithmal.itio.codec.sgip.message.*;
+import io.github.ithmal.itio.codec.sgip.sequence.SequenceManager;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ public class SgipServerTests {
     public void testListen() throws InterruptedException {
         int port = 8801;
         //
+        SequenceManager sequenceManager = new SequenceManager();
         ItioServer server = new ItioServer();
         server.registerCodecHandler(ch -> new SgipMessageCodec());
         // 连接请求
@@ -41,7 +43,7 @@ public class SgipServerTests {
                 ctx.writeAndFlush(response);
                 // 报告
                 if (msg.getReportFlag() == 1) {
-                    ReportRequest reportRequest = new ReportRequest(1);
+                    ReportRequest reportRequest = new ReportRequest(sequenceManager.nextValue());
                     reportRequest.setSubmitSequenceNumber(msg.getSequenceId());
                     reportRequest.setReportType((short) 0);
                     reportRequest.setUserNumber(msg.getUserNumbers()[0]);
@@ -51,7 +53,7 @@ public class SgipServerTests {
                 }
                 // 上行
                 if (msg.getReportFlag() == 1) {
-                    DeliverRequest deliverRequest = new DeliverRequest(2);
+                    DeliverRequest deliverRequest = new DeliverRequest(sequenceManager.nextValue());
                     deliverRequest.setSpNumber(msg.getSpNumber());
                     deliverRequest.setUserNumber(msg.getUserNumbers()[0]);
                     deliverRequest.setTpPid((short) 0);

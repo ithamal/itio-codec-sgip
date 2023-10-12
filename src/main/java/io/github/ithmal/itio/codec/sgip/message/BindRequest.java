@@ -53,6 +53,7 @@ public class BindRequest extends SgipMessage {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", reserve='" + reserve + '\'' +
+                ", sequenceId=" + sequenceId +
                 '}';
     }
 }
